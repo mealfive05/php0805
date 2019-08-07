@@ -4,6 +4,7 @@
   function check($username,$password){
   require_once("config.php");
   $link = mysqli_connect($dbhost,$dbuser,$dbpass);
+  $result = mysqli_query($link, "set names utf8");
   mysqli_select_db($link,$dbname);
   $sqlCommand = "select * from members where username='$username'";
   $result = mysqli_query($link,$sqlCommand);
@@ -13,6 +14,12 @@
     return 1;
     else
     return 0;
+    // CREATE TABLE `hw`.`members` ( `mid` INT NOT NULL AUTO_INCREMENT , `username` VARCHAR(40) NOT NULL ,
+    //  `password` VARCHAR(40) NOT NULL , `root` INT NOT NULL , PRIMARY KEY (`mid`)) ENGINE = InnoDB;
+    // INSERT INTO `members` (`mid`, `username`, `password`, `root`) VALUES 
+    // (NULL, 'jonas', 'jonas', '1'), (NULL, 'magic', 'magic', '2');
+
+
   //     echo "mid :{$row['mid']}<br>";
   //     echo "username :{$row['username']}<br>";
   //     echo "passsword :{$row['password']}<br>";

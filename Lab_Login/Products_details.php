@@ -1,31 +1,36 @@
 <?php
 session_start();
+
 if ($_GET["pid"]) {
 
     $pid = $_GET["pid"];
     require_once("config.php");
     $link = mysqli_connect($dbhost, $dbuser, $dbpass);
+    $result = mysqli_query($link, "set names utf8");
     mysqli_select_db($link, $dbname);
     $sqlCommand = "select * from Products where `pid`= $pid";
     $result = mysqli_query($link, $sqlCommand);
     $row = mysqli_fetch_assoc($result);
+    
+// echo strpos($_SESSION["caritem"], $row["pname"]);
 
-echo strpos($_SESSION["caritem"], $row["pname"]);
     if (isset($_POST["addcar"])) {
+        $car_array=array("pname"=>$row["pname"],"price"=>$row["price"],"number"=>$_POST["number"]);
+    print_r($car_array);
         if (isset($_SESSION["carlist"])) {
-            if (strpos($_SESSION["caritem"], $row["pname"]) == false) {
-                $_SESSION["caritem"] = $_SESSION["caritem"] . "," . $row["pname"];
-                $_SESSION["carlist"] = array_merge($_SESSION["carlist"], array($row["pname"] => $row));
+            if (strpos($_SESSION["caritem"], $row["pname"]) === false) {
+                $_SESSION["caritem"] = $_SESSION["caritem"] . "," . $car_array["pname"];
+                $_SESSION["carlist"] = array_merge($_SESSION["carlist"], array($car_array["pname"] => $car_array));
             } else {
                 echo "有重複";
-                $_SESSION["carlist"]["紅茶"]["amount"] = $_SESSION["carlist"]["紅茶"]["amount"] + 2;
+                $_SESSION["carlist"][$car_array["pname"]]["number"] = $_POST["number"];
             }
         } else {
             if (isset($_SESSION["caritem"])) {
-                $_SESSION["carlist"] = array($row["pname"] => $row);
+                $_SESSION["carlist"] = array($car_array["pname"] => $car_array);
             } else {
-                $_SESSION["caritem"] = $row["pname"];
-                $_SESSION["carlist"] = array($row["pname"] => $row);
+                $_SESSION["caritem"] = $car_array["pname"];
+                $_SESSION["carlist"] = array($car_array["pname"] => $car_array);
             }
         }
     }
@@ -83,12 +88,33 @@ echo strpos($_SESSION["caritem"], $row["pname"]);
         </span></div>
 
     <form id="form_car" name="form_car" method="post" action="">
-        數量 : <input type="number" name="amount" value="0">
+        購物車內產品數量 : <input type="number" name="number" value=
+        <?php 
+        
+        
+        
+
+        if( isset($_SESSION["caritem"])){
+                if(strpos($_SESSION["caritem"], $row["pname"])===false){
+                    echo 0;
+                }else{echo $_SESSION["carlist"][$row["pname"]]["number"];}
+        }else{
+        echo 0;
+        }
+        ?>>
         <br>
+        
         <input type="submit" name="addcar" id="addcar" value="加入購物車" />
     </form>
     <br />
     <div><a href="index.php">返回首頁</a></div>
+    <?php 
+    // echo $_SESSION["caritem"];
+    // echo  $A=$_SESSION["caritem"];
+    // echo  $N=$row["pname"];
+    // if(strpos($A, $N)===0){
+    //     echo "111";}else{echo "000";}
+     ?>
 
 
 

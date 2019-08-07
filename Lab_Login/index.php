@@ -9,6 +9,7 @@ $_SESSION["BackTo"]="index.php";
 
 require_once("config.php");
   $link = mysqli_connect($dbhost,$dbuser,$dbpass);
+  $result = mysqli_query($link, "set names utf8");
   mysqli_select_db($link,$dbname);
   $sqlCommand = "select * from Products ";
   $result = mysqli_query($link,$sqlCommand);
@@ -54,7 +55,9 @@ require_once("config.php");
       <?php } else{ ?>
       <a href="login.php?signout=1">登出</a>
       <?php }?>
-      | <a href="secret.php">會員專用頁</a></td>
+      | <a href="secret.php">會員專用頁</a>
+      <a href="carlist.php">查看購物車</a></td>
+      
   </tr>
   <tr>
     <td align="center" bgcolor="#CCCCCC">welcome! <?php echo $userName ;?></td>
