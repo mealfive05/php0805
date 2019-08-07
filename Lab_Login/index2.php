@@ -29,7 +29,7 @@
 <div data-role="page" data-theme="c">
 
 <div data-role="header">
-	<h1>Employee Details</h1>
+	
 </div>
 
 <div data-role="content">

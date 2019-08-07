@@ -14,8 +14,19 @@ session_start();
     
 //     }
 //     exit();
-print_r($_SESSION["caritem"]);
-print_r($_SESSION["carlist"]);
+// print_r($_SESSION["caritem"]);
+$str_sec = explode(",",$_SESSION["caritem"]);
+for($i=0;$i<count($_SESSION["carlist"]);$i++){
+$cc=$str_sec[$i];
+
+$carlist=$_SESSION["carlist"];
+//print_r($_SESSION["carlist"]);
+//print_r($carlist[$cc]);
+foreach($carlist[$cc] as $key=>$value){
+	echo $key .":".$value;
+	echo "<br>";
+}
+}
 // ?>
 <!-- <!DOCTYPE html>
 <html>
