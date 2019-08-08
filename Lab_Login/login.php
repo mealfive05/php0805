@@ -1,7 +1,7 @@
 <?php
   session_start();
 
-  function check($username,$password){
+  function check($username,$password){      //當驗證通過回傳1，沒通過回傳0
   require_once("config.php");
   $link = mysqli_connect($dbhost,$dbuser,$dbpass);
   $result = mysqli_query($link, "set names utf8");
@@ -30,11 +30,11 @@
   }
   
   if(isset($_POST["btnOK"])){
-    $login_ornot=check($_POST["txtUserName"],$_POST["txtPassword"]);
+    $login_ornot=check($_POST["txtUserName"],$_POST["txtPassword"]); 
     if($_POST["txtUserName"]!=""&& $login_ornot){
       $_SESSION["userName"]=$_POST["txtUserName"];
-      if($_SESSION["BackTo"]){
-      header("location: " .$_SESSION["BackTo"]);
+      if($_SESSION["BackTo"]){                      //當session有BackTO時
+      header("location: " .$_SESSION["BackTo"]);    //導去紀錄的地方
       }else{
         header("location: index.php" );
       }

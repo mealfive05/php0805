@@ -28,38 +28,38 @@ foreach($carlist[$cc] as $key=>$value){
 }
 }
 // ?>
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Lab</title>
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<script src="scripts/jquery-1.9.1.min.js"></script>
-<script src="scripts/jquery.mobile-1.3.2.min.js"></script>
-<link rel="stylesheet" href="scripts/jquery.mobile-1.3.2.min.css" />
-<link rel="stylesheet" href="styles.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Lab - index</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<style>
+table { 
+  border:1px solid #000; 
+  font-family: 微軟正黑體;
+  font-size:16px; 
+  width:70%;
+  border:1px solid #000;
+  text-align:center;
+  border-collapse:collapse;
+} 
+td { 
+  border:1px solid #000;
+  padding:5px;
+} 
+</style>
 </head>
 <body>
-<div data-role="page" data-theme="c">
-
-<div data-role="header">
-	
-</div>
-
-<div data-role="content">
-	<ul data-role="listview" data-filter="true">
-        
-			<li>
-		 
-			<img src="images/blacktea.png">
-			<h4> </h4>
-			<p> </p> <span class="ui-li-count">4</span>
-		
-		</li>
-        
-		</ul>
-</div>
+<table>
+<tr>
+  <td rowspan="2">rowspan欄位</td>
+  <td>表格1</td></tr>
+<tr>
+  <td>表格2</td>
+</tr>
+</table>
 
 </div>
 </body>
-</html> -->
+</html>

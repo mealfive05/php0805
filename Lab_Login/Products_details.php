@@ -1,22 +1,22 @@
 <?php
 session_start();
 
-if ($_GET["pid"]) {
+if ($_GET["pid"]) {                                                //當有網址有取到商品id時
 
     $pid = $_GET["pid"];
-    require_once("config.php");
+    require_once("config.php");                                     //引用mysql資料
     $link = mysqli_connect($dbhost, $dbuser, $dbpass);
     $result = mysqli_query($link, "set names utf8");
     mysqli_select_db($link, $dbname);
-    $sqlCommand = "select * from Products where `pid`= $pid";
+    $sqlCommand = "select * from Products where `pid`= $pid";       //取出那項商品
     $result = mysqli_query($link, $sqlCommand);
     $row = mysqli_fetch_assoc($result);
-    
-// echo strpos($_SESSION["caritem"], $row["pname"]);
 
-    if (isset($_POST["addcar"])) {
-        $car_array=array("pname"=>$row["pname"],"price"=>$row["price"],"number"=>$_POST["number"]);
-    print_r($car_array);
+    // echo strpos($_SESSION["caritem"], $row["pname"]);
+
+    if (isset($_POST["addcar"])) {                                                                                      //接收到"加到購物車"時
+        $car_array = array("pname" => $row["pname"], "price" => $row["price"], "number" => $_POST["number"]);
+        print_r($car_array);
         if (isset($_SESSION["carlist"])) {
             if (strpos($_SESSION["caritem"], $row["pname"]) === false) {
                 $_SESSION["caritem"] = $_SESSION["caritem"] . "," . $car_array["pname"];
@@ -35,29 +35,6 @@ if ($_GET["pid"]) {
         }
     }
 }
-//     if (isset($_POST["addcar"])) {
-//         if(isset($_SESSION["pname"])){
-//             strpos()
-//         $_SESSION["pname"]=$_SESSION["pname"].",".$row["pname"];
-//         $_SESSION["price"]=$_SESSION["price"].",".$row["price"];
-//         $_SESSION["amount"]=$_SESSION["amount"].",".$_POST["amount"];
-
-
-//         }else{
-
-//             $_SESSION["pname"]=$row["pname"];
-//             $_SESSION["price"]=$row["price"];
-//             $_SESSION["amount"]=$_POST["amount"];
-
-
-
-//         }
-//      }
-//      echo  $_SESSION["pname"];echo "<br>";
-//       echo $_SESSION["price"];echo "<br>";
-//       echo $_SESSION["amount"];echo "<br>";
-
-// }
 
 ?>
 
@@ -88,33 +65,30 @@ if ($_GET["pid"]) {
         </span></div>
 
     <form id="form_car" name="form_car" method="post" action="">
-        購物車內產品數量 : <input type="number" name="number" value=
-        <?php 
-        
-        
-        
+        購物車內產品數量 : <input type="number" name="number" value=<?php
 
-        if( isset($_SESSION["caritem"])){
-                if(strpos($_SESSION["caritem"], $row["pname"])===false){
-                    echo 0;
-                }else{echo $_SESSION["carlist"][$row["pname"]]["number"];}
-        }else{
-        echo 0;
-        }
-        ?>>
+
+
+
+                                                            if (isset($_SESSION["caritem"])) {
+                                                                if (strpos($_SESSION["caritem"], $row["pname"]) === false) {
+                                                                    echo 0;
+                                                                } else {
+                                                                    echo $_SESSION["carlist"][$row["pname"]]["number"];
+                                                                }
+                                                            } else {
+                                                                echo 0;
+                                                            }
+                                                            ?>>
         <br>
-        
+
         <input type="submit" name="addcar" id="addcar" value="加入購物車" />
     </form>
     <br />
     <div><a href="index.php">返回首頁</a></div>
-    <?php 
-    // echo $_SESSION["caritem"];
-    // echo  $A=$_SESSION["caritem"];
-    // echo  $N=$row["pname"];
-    // if(strpos($A, $N)===0){
-    //     echo "111";}else{echo "000";}
-     ?>
+    <?php
+
+    ?>
 
 
 
